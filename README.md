@@ -35,7 +35,7 @@ state = {
 [uuid](https://www.npmjs.com/package/uuid#version-4). После завершения этого
 шага, приложение должно выглядеть примерно так.
 
-![preview](./mockup/step-1.png)
+![preview](./preview/phonebook/mockup/step-1.png)
 
 ## Шаг 2
 
