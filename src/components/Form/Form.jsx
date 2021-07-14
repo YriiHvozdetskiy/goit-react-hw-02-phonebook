@@ -1,9 +1,5 @@
 function Form() {
-  return (
-    <div>
-      <h1>dsfdsf</h1>
-    </div>
-  );
+  return <div></div>;
 }
 
 export default Form;
