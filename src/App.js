@@ -1,10 +1,9 @@
-import { Form } from './components/Input/Form';
-import { logo } from './logo.png';
+import Form from './components/Form';
 
 export const App = () => {
   return (
     <>
-      <img src={logosddfdsf} />
+      <Form />
     </>
   );
 };
