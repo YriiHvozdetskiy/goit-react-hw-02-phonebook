@@ -1,9 +1,13 @@
-import { Input } from './components/Input/Input';
+import { Form } from './components/Input/Form';
 
 export const App = () => {
-    return (
-        <div>
-            <Input />
-        </div>
-    );
+  return (
+    <div>
+      <Form />
+    </div>
+  );
+};
+
+export const App = () => {
+  return <></>;
 };
