@@ -13,6 +13,16 @@
   border: solid 1px grey;
   background-color: transparent;
   outline: none;
+  transition: background-color color 250ms ease 0s;
+
+  &:hover {
+    background-color: green;
+    color: white;
+  }
+  &:focus {
+    background-color: blue;
+    color: white;
+  }
 }
 
 .label {

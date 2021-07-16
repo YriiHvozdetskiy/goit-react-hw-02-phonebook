@@ -15,31 +15,66 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
+    // name: '',
+    // number: '',
   };
 
   addContact = (name, number) => {
-    console.log('nameContact', name);
-    console.log('numberContact', number);
-
     const contact = { id: nanoid(), name, number };
-    console.log(this.state);
 
     this.setState(({ contacts }) => ({
       contacts: [contact, ...contacts],
     }));
   };
 
+  deleteContact = e => {
+    const id = e.currentTarget.id;
+
+    this.setState(prevState => {
+      return { contacts: prevState.contacts.filter(n => n.id !== id) };
+    });
+  };
+
+  changeFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+
+  getVisibleContacts = () => {
+    const { filter, contacts } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+
+    return contacts.filter(({ name }) =>
+      name.toLowerCase().includes(normalizedFilter),
+    );
+  };
+
+  handleCoincidence = currentName => {
+    if (
+      this.state.contacts.find(({ name }) => name.toLowerCase() === currentName)
+    ) {
+      alert(`${currentName} is alredy in contacts`);
+      return true;
+    }
+  };
+
   render() {
-    const { contacts } = this.state;
+    const { filter } = this.state;
+
+    const filterContacts = this.getVisibleContacts();
+
     return (
       <>
         <Title>Phonebook</Title>
-        <ContactForm onSubmit={this.addContact} />
+        <ContactForm
+          onSubmit={this.addContact}
+          coincidence={this.handleCoincidence}
+        />
         <Title>Contacts</Title>
-        <Filter />
-        <ContactList contacts={contacts} />
+        <Filter value={filter} onChange={this.changeFilter} />
+        <ContactList
+          contacts={filterContacts}
+          deleteContact={this.deleteContact}
+        />
       </>
     );
   }

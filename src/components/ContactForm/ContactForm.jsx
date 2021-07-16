@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
+import { DebounceInput } from 'react-debounce-input';
 import s from './ContactForm.module.scss';
 
 class ContactForm extends Component {
@@ -13,18 +14,26 @@ class ContactForm extends Component {
 
   handleName = e => {
     this.setState({
-      name: e.currentTarget.value,
+      name: e.target.value,
     });
+    // this.setState({
+    //   name: e.currentTarget.value,
+    // });
   };
 
   handleNumber = e => {
     this.setState({
-      number: e.currentTarget.value,
+      number: e.target.value,
     });
+    // this.setState({
+    //   number: e.currentTarget.value,
+    // });
   };
 
   handleSubmit = e => {
     e.preventDefault();
+
+    if (this.props.coincidence(this.state.name.toLowerCase())) return;
 
     this.props.onSubmit(this.state.name, this.state.number);
 
@@ -43,7 +52,19 @@ class ContactForm extends Component {
             <label className={s.label} htmlFor={this.nameInputId}>
               Name
             </label>
-            <input
+            <DebounceInput
+              className={s.input}
+              name="name"
+              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+              required
+              id={this.nameInputId}
+              value={this.state.name}
+              debounceTimeout={300}
+              onChange={this.handleName}
+            />
+
+            {/* <input
               className={s.input}
               type="text"
               name="name"
@@ -53,12 +74,23 @@ class ContactForm extends Component {
               id={this.nameInputId}
               onChange={this.handleName}
               value={this.state.name}
-            />
+            /> */}
 
             <label className={s.label} htmlFor={this.phoneInpudId}>
               Number
             </label>
-            <input
+            <DebounceInput
+              className={s.input}
+              type="tel"
+              id={this.phoneInpudId}
+              value={this.state.number}
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+              required
+              debounceTimeout={300}
+              onChange={this.handleNumber}
+            />
+            {/* <input
               className={s.input}
               type="tel"
               name="number"
@@ -68,7 +100,7 @@ class ContactForm extends Component {
               required
               onChange={this.handleNumber}
               value={this.state.number}
-            />
+            /> */}
 
             <button className={s.button} type="submit">
               Add contact
