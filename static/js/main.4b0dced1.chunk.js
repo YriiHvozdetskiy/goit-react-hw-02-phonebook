@@ -1,2 +1,0 @@
-(this["webpackJsonphw-02-phonebook"]=this["webpackJsonphw-02-phonebook"]||[]).push([[0],{9:function(e,t,n){"use strict";n.r(t);var o=n(1),c=n.n(o),r=n(3),s=n.n(r),h=n(0),i=function(){return Object(h.jsx)("div",{})};s.a.render(Object(h.jsx)(c.a.StrictMode,{children:Object(h.jsx)(i,{})}),document.getElementById("root"))}},[[9,1,2]]]);
-//# sourceMappingURL=main.4b0dced1.chunk.js.map
