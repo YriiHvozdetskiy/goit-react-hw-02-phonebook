@@ -12,22 +12,9 @@ class ContactForm extends Component {
     number: '',
   };
 
-  handleName = e => {
-    this.setState({
-      name: e.target.value,
-    });
-    // this.setState({
-    //   name: e.currentTarget.value,
-    // });
-  };
-
-  handleNumber = e => {
-    this.setState({
-      number: e.target.value,
-    });
-    // this.setState({
-    //   number: e.currentTarget.value,
-    // });
+  hanldeChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
   };
 
   handleSubmit = e => {
@@ -61,7 +48,7 @@ class ContactForm extends Component {
               id={this.nameInputId}
               value={this.state.name}
               debounceTimeout={300}
-              onChange={this.handleName}
+              onChange={this.hanldeChange}
             />
 
             {/* <input
@@ -82,13 +69,14 @@ class ContactForm extends Component {
             <DebounceInput
               className={s.input}
               type="tel"
+              name="number"
               id={this.phoneInpudId}
               value={this.state.number}
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
               required
               debounceTimeout={300}
-              onChange={this.handleNumber}
+              onChange={this.hanldeChange}
             />
             {/* <input
               className={s.input}
